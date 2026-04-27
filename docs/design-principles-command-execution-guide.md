@@ -48,6 +48,8 @@
 
 **공통 전제**: Cursor에서 **단위 프로젝트 루트**(예: 모노레포의 `services/foo/`)를 작업 디렉터리로 두고, 각 커맨드 실행 시 에이전트에게 **같은 루트의 `docs/`** 에만 쓰라고 명시한다.
 
+> 저장 강제(권장 룰): AI Agent Notebook 또는 채팅으로 커맨드를 단계별 실행할 때, **각 단계마다** 결과가 `docs/**` 파일로 **실제로 생성/갱신**되게 한다. 텍스트 출력만 하고 파일을 남기지 않는 방식은 금지한다. (`.cursor/rules/design-principles-persist-docs-each-prompt.mdc`)
+
 ---
 
 ### ① `/design-principles/define-system`
