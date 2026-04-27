@@ -1,0 +1,19 @@
+# SW 설계·구현 템플릿 (Cursor)
+
+설계 활동을 **Cursor Rules · Commands · Skills**로 표준화해, 새 소프트웨어를 **`docs/` 기반 설계 → 구현**까지 같은 패턴으로 진행하기 위한 **재사용 템플릿** 저장소이다.
+
+## 빠른 시작
+
+1. 이 저장소를 **새 프로젝트에 복제**하거나, `.cursor/` 전체와 `docs/`·루트 가이드를 필요한 경로에 복사한다.  
+2. [`sw_design_and_implementation_guide.md`](./sw_design_and_implementation_guide.md)를 연다.  
+3. 단위 프로젝트 루트에 `docs/`를 만들고, VS Code `designPrinciples.architectureDirectory`를 그 `docs`에 맞춘다(예: `"docs"` 또는 `"services/foo/docs"`).  
+4. Cursor에서 `/design-principles/define-system`부터 [`docs/design-principles-command-execution-guide.md`](./docs/design-principles-command-execution-guide.md)의 순서대로 커맨드를 실행한다.
+
+## 포함 내용
+
+- **Commands**: `.cursor/commands/design-principles/*`  
+- **Rules**: `.cursor/rules/design-principles/**` + 공통 `.mdc`  
+- **Skills**: `adr-authoring`, `folder-based-explanation-docs`  
+- **실행 순서 정본**: `docs/design-principles-command-execution-guide.md`
+
+라이선스·기여 정책은 저장소 소유자가 추가하면 된다.

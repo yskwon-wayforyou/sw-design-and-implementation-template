@@ -1,0 +1,49 @@
+---
+description: 설계 원칙 워크플로에 맞춰 단위 프로젝트가 docs에 두어야 할 필수 산출물을 정의하고 문서화한다
+globs:
+  - "**/docs/**/*.md"
+  - .cursor/rules/design-principles/**/*.md
+alwaysApply: false
+---
+
+# 설계 원칙 — **프로젝트 필수 산출물** 도출·문서화
+
+## 1. 목적
+
+구조 설계 워크플로([`design-principles/workflow.md`](./design-principles/workflow.md))에 맞춰, **단위 프로젝트 루트**의 **`docs/`** 아래에 **어떤 파일·정보가 반드시 있어야 하는지**를 고정한다. 에이전트·저자는 이 표를 **체크리스트**로 쓰고, 통합 설계 허브(예: `DESIGN-INTEGRATED.md`)에는 **경로·역할·준수 상태**를 요약해 넣는다.
+
+## 2. 적용 위치
+
+- 산출물 **본문**: `{단위 프로젝트 루트}/docs/` — [`design-principles-architecture-under-docs.mdc`](./design-principles-architecture-under-docs.mdc)와 동일.  
+- **전역 vs 프로젝트 한정 룰** 배치: [`design-rules-scope-global-vs-project.mdc`](./design-rules-scope-global-vs-project.mdc).
+
+## 3. 필수 산출물 (워크플로 Phase 대응)
+
+| Phase | 산출물(경로 관례) | 문서에 남겨야 할 최소 내용 |
+|-------|-------------------|---------------------------|
+| 1 시스템 정의 | `docs/system.md` | 목적·경계(In/Out)·주요 액터·제약 |
+| 1 | `docs/business.md` | 비즈니스 목표·드라이버·이해관계자 |
+| 2 기능 명세 | `docs/usecases.md` | UC 목록·식별자·우선순위·다른 산출과의 링크 |
+| 2 | `docs/usecase/UC-*.md` | **주요 UC마다** 액터·전제/사후·기본·대안 흐름 |
+| 3 도메인 | `docs/domain/model.md` | 논리 컴포넌트·책임·UC와의 대응(통합 모델) |
+| 4 품질 | `docs/quality/scenarios.md` | QJ·속성·허용 기대(측정 가능하게) |
+| 5–7 후보~구조 명세 | `docs/architecture.md` | 공개 인터페이스·비기능·구조 뷰(바깥→안) |
+| 전 Phase | `docs/adr/*.md` | **구조에 영향 있는 결정**은 ADR로 채택 기록 |
+| 전 Phase | `docs/asr.md` 또는 동등 분절 | **아키텍처 유의 요구** ID·우선순위·검증 힌트 |
+
+### 3.1 선택·통합 규칙
+
+- `docs/domain/UC-*.md`, `docs/quality/QS-*.md`, `docs/candidate/*`, `docs/decision/*` 등은 **필요 시**만 둔다. 생략하면 **어느 ADR·`architecture.md`·QJ에 흡수했는지** 한 줄이라도 남긴다.  
+- **통합 설계** 파일이 있으면(예: `DESIGN-INTEGRATED.md`), 위 산출물은 **§ 색인 표**로 한눈에 링크·상태(있음/부분/예정)를 적는다.
+
+## 4. 통합 설계 허브에 넣을 요약
+
+- **필수 표**: 산출물 | 경로 | 역할 한 줄 | 상태.  
+- **룰·워크플로 표 전부**를 허브에 붙이지 않는다(허브에는 **설계 결과·링크·상태**만 두고, 방법론 본문은 `.cursor/rules`에 둔다).
+
+## 5. 에이전트·저자 체크리스트
+
+1. `system.md`·`business.md`·`usecases.md`·`usecase/`·`domain/model.md`·`quality/scenarios.md`·`architecture.md`가 **요구 범위에 대해** 채워졌는가?  
+2. 구조 결정이 **ADR**에 잡혀 있는가(번호·제목·상태)?  
+3. ASR(또는 동등)이 **요구 ID**로 추적 가능한가?  
+4. 통합 설계(또는 README)에 **색인·상태**가 갱신되었는가?
