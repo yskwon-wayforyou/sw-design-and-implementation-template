@@ -1,0 +1,98 @@
+---
+version: 2
+title: "Sample: Python Qt6 — DevCalc + Hex Editor (상용급 드라이런)"
+template_short_label: "Python Qt6 상용 샘플"
+notebook_system_prompt: >
+  목적: 이 노트북을 Run All로 실행하면, 하나의 프로젝트 폴더를 만들고 그 아래에 docs(설계)와 src/tests(코드/테스트),
+  installer(배포 준비)까지 “상용 제품 수준”으로 한 사이클을 생성한다.
+
+  필수 규칙:
+  - 첫 산출물 전에 프로젝트 폴더를 생성한다.
+  - 설계 산출물은 반드시 `{프로젝트루트}/docs/**` 아래에 파일로 실제 생성/갱신한다.
+  - Python 가이드는 venv 기준으로 안내한다(Windows PowerShell).
+  - 다이어그램은 Mermaid로 작성한다.
+
+  품질 게이트(샘플 기준):
+  - `ruff`(lint/format)와 `pytest`가 통과하는 상태를 목표로 한다.
+  - GUI는 최소 동작을 보장하되, 테스트는 도메인/서비스 로직 위주로 고정한다.
+
+description: "간단한 제품 기술만으로 설계→구현→테스트→배포준비까지 쭉 진행하는 샘플 .aanb"
+tags: [sample, python, qt6, pyside6, gui, commercial, workflow]
+llm_config:
+  provider: ollama
+  model: gemma3:4b
+---
+
+## Prompt: 00 — 제품 브리프(샘플)
+
+다음 “제품 브리프”를 **확정 브리프**로 정리하고, 프로젝트 루트/모듈/산출물 경로를 선언하라.
+
+- 프로젝트 폴더(상대 경로): `./samples/_run/devcalc-hex`
+- 제품명: DevCalc Hex
+- 한 줄 목표: 개발자용 전문 계산기 + Hex editor를 한 앱에서 제공한다.
+- 핵심 기능: 식 기반 계산, 단위 변환(기본), 프로그래머 모드(진법/비트연산), 파일 열기/보기/편집/저장(헥스)
+- UI: 모던/깔끔, 다크/라이트 토글
+- 플랫폼: Windows 10+
+- 기술: Python 3.x, Qt6(Pyside6), pyinstaller
+
+## Prompt: 00A — 프로젝트 폴더 생성 & 기본 스캐폴드(실제 파일)
+
+00의 프로젝트 폴더를 만들고, 아래를 **실제 파일로 생성**하라.
+
+- `{프로젝트루트}/docs/README.md`
+- `{프로젝트루트}/docs/open-issues.md`
+- `{프로젝트루트}/README.md`
+
+## Prompt: 01 — 설계 산출물(최소 세트) 생성
+
+다음을 `{프로젝트루트}/docs/**`로 생성/갱신하라(전체 본문 포함).
+
+- `docs/system.md`
+- `docs/business.md`
+- `docs/usecases.md` + `docs/usecase/UC-*.md`(핵심 4개만)
+- `docs/domain/model.md`
+- `docs/quality/scenarios.md` + `docs/qualities.md`
+- `docs/architecture.md` (Mermaid 2개: 컴포넌트, 시퀀스)
+- `docs/deployment.md` (11절 목차 준수)
+- `docs/asr.md` (상용 제품 체크 포함)
+- `docs/adr/0001-qt-binding-choice.md` (대안 3개 이상: PySide6 vs PyQt6 vs Avalonia/others)
+
+## Prompt: 02 — 구현 스캐폴드(프로젝트 파일 생성)
+
+다음을 `{프로젝트루트}`에 생성/갱신하라.
+
+- `pyproject.toml` (dependencies + dev extras)
+- `src/devcalchex/...` (앱 엔트리 + UI + 도메인/서비스)
+- `tests/...` (pytest)
+- `scripts/dev.ps1`, `scripts/test.ps1`, `scripts/build.ps1`
+
+요구:
+- 계산기는 안전한 표현식 평가(허용 연산 제한) + 프로그래머 모드(AND/OR/XOR/SHIFT) 핵심만
+- Hex editor는 파일 open/save, hex/ascii 뷰 동기화(최소)
+- UI는 Dock(Hex) + 탭(계산기) 구성, 다크/라이트 토글
+
+## Prompt: 03 — 테스트/품질 게이트 확인
+
+다음을 만족하도록 파일을 추가/수정하라.
+
+- `pytest -q`가 통과
+- `ruff check .`가 통과(또는 최소 설정으로 통과)
+
+## Prompt: 04 — 배포 준비(Windows) 보강
+
+다음을 `{프로젝트루트}`에 생성/갱신하라.
+
+- `installer/inno-setup.iss` (초안)
+- `docs/deployment.md`에 빌드/릴리스 절차를 구체화(버전, 산출물 경로, 롤백)
+- `docs/operations/runbook.md` (간단 런북: 장애/로그/수집)
+
+## Prompt: 05 — 드라이런 실행 가이드(venv)
+
+사용자가 Windows PowerShell에서 실행할 명령을 순서대로 제시하라.
+
+- venv 생성/활성화
+- 의존성 설치
+- 개발 실행
+- 테스트 실행
+- 빌드 실행
+

@@ -2,3 +2,9 @@
 Thumbs.db
 *.log
 .vscode/settings.json
+
+# Agent Notebook runtime artifacts
+.agent-notebook/
+
+# Sample execution outputs (generated)
+samples/_run/
