@@ -156,3 +156,13 @@ flowchart LR
 ---
 
 *본 가이드는 템플릿 저장소의 진입 문서다. 제품별 세부 내용은 각 프로젝트의 `docs/`에만 둔다.*
+
+---
+
+## 8. 이 템플릿의 Git 원격
+
+- **저장소**: [https://github.com/yskwon-wayforyou/sw-design-and-implementation-template](https://github.com/yskwon-wayforyou/sw-design-and-implementation-template)
+
+```bash
+git clone https://github.com/yskwon-wayforyou/sw-design-and-implementation-template.git
+```

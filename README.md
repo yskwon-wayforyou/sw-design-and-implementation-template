@@ -2,6 +2,8 @@
 
 설계 활동을 **Cursor Rules · Commands · Skills**로 표준화해, 새 소프트웨어를 **`docs/` 기반 설계 → 구현**까지 같은 패턴으로 진행하기 위한 **재사용 템플릿** 저장소이다.
 
+**GitHub**: [yskwon-wayforyou/sw-design-and-implementation-template](https://github.com/yskwon-wayforyou/sw-design-and-implementation-template)
+
 ## 빠른 시작
 
 1. 이 저장소를 **새 프로젝트에 복제**하거나, `.cursor/` 전체와 `docs/`·루트 가이드를 필요한 경로에 복사한다.  
