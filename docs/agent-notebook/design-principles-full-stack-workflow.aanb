@@ -1,0 +1,240 @@
+---
+version: 2.0
+title: "SW 설계·구현 템플릿 — 전 주기 (docs→코드)"
+template_short_label: "설계 템플릿 전 주기"
+notebook_system_prompt: |
+  당신은 **sw-design-and-implementation-template** 방법론을 따르는 설계·구현 조력자다.
+  근거 문서(개념): 저장소 루트 `sw_design_and_implementation_guide.md`, 정본 실행 순서: `docs/design-principles-command-execution-guide.md`.
+  산출 규칙: 설계 본문은 **단위 프로젝트 루트의 `docs/`** 아래에만 둔다. `spec/` 등 문서용 병렬 최상위 폴더를 새로 만들지 않는다.
+  Cursor 연동 시 각 단계는 슬래시 커맨드 `/design-principles/...`와 대응한다. 커맨드 본문은 `.cursor/commands/design-principles/*.md`에 있다.
+  룰: `collaborative-design-first`(불명확하면 구현 금지, **모듈 단위 허가** 후에만 코드), `design-principles-project-deliverables`, `design-principles-deployment-documentation`, 상용 시 `commercial-product-design-requirements`를 요약에 반영한다.
+  스킬: 구조적 결정 기록은 `.cursor/skills/adr-authoring/SKILL.md` 템플릿(대안 3개 이상)을 따른다. 폴더형 이해 문서가 필요하면 `.cursor/skills/folder-based-explanation-docs/SKILL.md`를 따른다.
+  응답 언어: **한국어** 기술 문체. 약어는 첫 등장 시 풀어 쓴다.
+  **이전 Prompt 셀의 출력**이 제공되면 그것을 선행 산출물로 간주하고 파일 간 교차 참조·용어 일관성을 유지한다.
+  각 산출은 **저장 가능한 형태**로: 먼저 한 줄 요약, 이어서 `경로` 제목 아래에 **전체 마크다운 파일 본문**을 코드 펜스(```markdown ... ```)로 제시한다. 추측은 "(가정)"으로 표시한다.
+  마지막 코드 생성(㉓)에서는 **설계에 명시·허가된 모듈만** 스캐폴딩하고, 한 번에 허가된 모듈 범위를 초과하지 않는다. 허가 범위가 불명확하면 코드 대신 확인 질문만 한다.
+description: "Cursor design-principles 커맨드 ①~㉓과 스킬·룰을 엮어 docs 산출 후 최소 스캐폴드까지 이어지는 순차 노트북."
+tags: [design-principles, cursor, docs, workflow, template]
+llm_config:
+  provider: ollama
+  model: gemma3:4b
+---
+
+## Markdown: 목적·두 가지 실행 모드
+
+이 노트북은 [sw_design_and_implementation_guide.md](../../sw_design_and_implementation_guide.md)와 [design-principles-command-execution-guide.md](../design-principles-command-execution-guide.md)의 **①~㉓** 흐름을 **Agent Notebook에서 순차 실행**할 때 쓴다.
+
+### 모드 A — Cursor + 커맨드(권장)
+
+1. **단위 프로젝트 루트**를 Cursor 워크스페이스로 연다. 모노레포면 `services/foo/`처럼 **그 모듈 루트**만 연다.
+2. `.vscode/settings.json`에 `"designPrinciples.architectureDirectory": "docs"`(또는 `"services/foo/docs"`)를 맞춘다.
+3. 아래 **각 Prompt 셀**을 실행한 뒤, 출력에 있는 **「Cursor에 붙여넣을 한 덩어리」**를 복사해 에이전트 채팅에 붙이거나, 동일 내용으로 **`/design-principles/...`** 커맨드를 실행한다.
+4. 에이전트가 만든 파일이 `docs/`에 생겼는지 확인한다.
+
+### 모드 B — 노트북만(Run All)
+
+에이전트가 **파일 전체 본문**을 마크다운 펜스로내므로, 사용자가 각 단계 출력을 **`docs/`의 해당 경로**에 저장한다. 마지막 ㉓에서 소스 트리 스니펫을 받아 프로젝트에 복사한다.
+
+### 일괄 실행으로 “완성”의 정의
+
+- **설계·문서 측면**: ①~㉒까지의 산출이 `docs/` 관례 경로에 채워지면 완료다.
+- **소프트웨어(코드) 측면**: ㉓에서 **허가된 모듈**의 스캐폴드·테스트 골격이 나오면 한 사이클이 끝난다. 협업 룰상 **전 모듈 풀구현**은 각 모듈별 사용자 허가가 필요할 수 있다 — 그 경우 ㉓ 프롬프트에 허가 모듈 목록을 명시한다.
+
+## Prompt: 00 — 제품 브리프(전 단계 공통 입력)
+
+아래 **제품 브리프**를 채운 값으로 이후 모든 단계를 일관되게 수행한다. 빈칸은 합리적 (가정)으로 보충하되, 치명적 불확실성은 질문으로 남긴다.
+
+**제품 브리프(여기를 사용자가 고친 뒤 이 셀만 먼저 실행)**
+
+- **단위 프로젝트 루트(상대 경로)**: `./` (예: `./services/billing-api/`)
+- **제품/모듈 이름**: TaskPulse
+- **한 줄 목표**: 소규모 팀의 할 일과 SLA 알림을 한 화면에서 관리한다.
+- **주요 사용자**: 팀 리드, 개별 기여자
+- **배포 형태**: Docker + 단일 VM, PostgreSQL
+- **구현 스택(가정 허용)**: 백엔드 TypeScript(Node)+REST, 프론트 React, DB PostgreSQL
+- **비기능 우선순위**: 가용성 > 일관성 > 비용
+- **상용/내부도구**: 내부 도구 (상용이면 GTM·멀티테넌시 등 추가 질문)
+- **이번 ㉓에서 스캐폴드 허가할 모듈(쉼표)**: `api`, `web` (필요 시 수정)
+
+**지시**: 위 브리프를 **「확정 브리프」**로 두고 2~3문단으로 재진술한다. 이후 단계에서 재사용할 **용어 사전(영문 ID 5개 이하)** 을 불릿으로 붙인다. Cursor 모드라면 다음 한 줄을 출력한다: `다음 셀부터 ①에 대해 /design-principles/define-system 과 동일한 산출을 요청합니다.`
+
+## Markdown: Phase 1 — 시스템·비즈니스 (①②)
+
+| 커맨드 | Cursor에서의 동작(요지) | 사용자가 추가로 넣을 내용 | 샘플 입력 |
+|--------|-------------------------|---------------------------|-----------|
+| ① `/design-principles/define-system` | `system-definer`가 `docs/system.md`만 작성 | In/Out 경계, 금지 범위, 외부 시스템 | "외부: Slack 웹훅만 Out, 결제 없음" |
+| ② `/design-principles/analyze-business` | `business-analyzer`가 `docs/business.md` | KPI, 이해관계자 권한 | "KPI: 주간 완료율 85%, 이해관계자: CTO 승인 필요" |
+
+## Prompt: ① define-system (`docs/system.md`)
+
+**확정 브리프**를 반영해 `system-definer` 역할로 **`docs/system.md` 전체 본문**만 작성한다. 다른 파일은 언급하지 않는다. 목적·경계(In/Out)·액터·제약·비목표를 포함한다. Mermaid로 맥락도 1개 이하.
+
+## Prompt: ② analyze-business (`docs/business.md`)
+
+선행: ① 출력. `business-analyzer`로 **`docs/business.md` 전체 본문**을 작성한다. `system.md`와 모순 없게 정렬한다.
+
+## Markdown: Phase 2 — 유스케이스 (③④)
+
+| 커맨드 | 동작 | 사용자 추가 입력 | 샘플 |
+|--------|------|------------------|------|
+| ③ `/design-principles/extract-usecases` | `docs/usecases.md` | UC 개수 상한, ID 규칙 | "최대 12개 UC, ID는 UC-NN" |
+| ④ `/design-principles/specify-usecase` | `docs/usecase/UC-*.md` | **상세화할 UC 목록** | "UC-01,UC-02,UC-05만 1차 스프린트" |
+
+## Prompt: ③ extract-usecases (`docs/usecases.md`)
+
+선행: ①②. `usecase-extractor`로 **`docs/usecases.md` 전체 본문**: UC 표(ID·이름·우선순위·액터·비고).
+
+## Prompt: ④ specify-usecase (`docs/usecase/`)
+
+선행: ③. `usecase-specifier`로 **상세화할 주요 UC 각각**에 대해 `docs/usecase/UC-xx.md` **전체 본문**을 순서대로 출력한다(파일마다 펜스 구분). 전제/사후·기본/대안 흐름 포함.
+
+## Markdown: Phase 3 — 도메인 (⑤)
+
+| 커맨드 | 동작 | 사용자 추가 입력 | 샘플 |
+|--------|------|------------------|------|
+| ⑤ `/design-principles/design-domain` | `docs/domain/model.md` | DDD 경계 용어 | "애그리거트: Tenant, WorkItem" |
+
+## Prompt: ⑤ design-domain (`docs/domain/model.md`)
+
+선행: ④. `domain-modeler`로 **`docs/domain/model.md` 전체 본문**: 논리 컴포넌트·책임·UC 매핑·데이터 흐름. Mermaid 컴포넌트 다이어그램 1개.
+
+## Markdown: Phase 4 — 품질 (⑥~⑨)
+
+| 커맨드 | 동작 | 사용자 추가 입력 | 샘플 |
+|--------|------|------------------|------|
+| ⑥ `/design-principles/elicit-scenarios` | `docs/quality/scenarios.md` | 품질 속성 우선순위 | "성능·보안·복구 우선" |
+| ⑦ `/design-principles/specify-scenario` | `docs/quality/QS-*.md`(선택) | 상세화할 시나리오 ID | "QJ-01,QJ-03만 파일화, 나머지는 ⑥에 흡수" |
+| ⑧ `/design-principles/evaluate-scenarios` | `docs/quality/evaluations.md` 등 | 평가 척도 | "영향도 H/M/L, 난이도 1~5" |
+| ⑨ `/design-principles/select-scenarios` | `docs/qualities.md` 등 | 회귀에 넣을 상위 N개 | "상위 5개를 SLO 초안에 반영" |
+
+## Prompt: ⑥ elicit-scenarios (`docs/quality/scenarios.md`)
+
+선행: ①②③. `quality-elicitor`로 **`docs/quality/scenarios.md` 전체 본문**(식별자·속성·측정 힌트).
+
+## Prompt: ⑦ specify-scenario (`docs/quality/QS-*.md` 또는 흡수 한 줄)
+
+선행: ⑥. `quality-specifier`로 중요 시나리오를 **`docs/quality/QS-*.md`** 로 상세화하거나, 생략 시 ⑥에 흡수했다는 **한 줄**과 이유를 출력한다.
+
+## Prompt: ⑧ evaluate-scenarios
+
+선행: ⑥(⑦). `quality-evaluator`로 **`docs/quality/evaluations.md`(또는 동등)** 전체 본문.
+
+## Prompt: ⑨ select-scenarios (`docs/qualities.md`)
+
+선행: ⑧. `quality-selector`로 **`docs/qualities.md`(또는 `selected-scenarios.md`)** 전체 본문: 회귀·SLO 우선 시나리오.
+
+## Markdown: Phase 5 — 후보·프레임워크·패키지 (⑩~⑮, 병렬 가능)
+
+| 커맨드 | 산출(요지) | 사용자 추가 입력 | 샘플 |
+|--------|------------|------------------|------|
+| ⑩ `design-performance` | `docs/candidate/*` 성능 | 목표 지연·처리량 | "p95 API 200ms, 500 rps" |
+| ⑪ `design-modifiability` | 변경 용이성 후보 | 모듈 치환 주기 | "분기별 릴리스" |
+| ⑫ `design-msa` | 모놀리스 vs 서비스 | 분할 금지 구역 | "결제 붙일 예정 없음" |
+| ⑬ `select-solutions` | `candidate/solutions.md` 등 | DB·캐시 선호 | "PostgreSQL 필수, Redis 선택" |
+| ⑭ `select-frameworks` | `frameworks.md` 등 | 금지 프레임워크 | "Java 금지" |
+| ⑮ `design-packages` | `packages.md` 등 | 레이어 명명 | "application / domain / infrastructure" |
+
+## Prompt: ⑩ design-performance
+
+선행: ⑤⑨. `performance-architect`로 **`docs/candidate/`** 관점의 성능 후보 노트(파일명 제안 포함) **전체 본문**.
+
+## Prompt: ⑪ design-modifiability
+
+선행: ⑤⑨. `modifiability-architect`로 **`docs/candidate/`** 에 변경 용이성 후보 **전체 본문**.
+
+## Prompt: ⑫ design-msa
+
+선행: ⑤⑨. `msa-architect`로 단일/다중 서비스 비교 **`docs/msa-notes.md` 또는 candidate** 전체 본문.
+
+## Prompt: ⑬ select-solutions
+
+선행: ⑤⑨ 및 ⑩~⑫ 중 일부. `solution-architect`로 **`docs/candidate/solutions.md`**, **`docs/candidate/candidates.md`** 초안 전체 본문(구체 코드 없음).
+
+## Prompt: ⑭ select-frameworks
+
+선행: ⑤⑨, ⑬ 권장. `framework-architect`로 **`docs/frameworks.md`(또는 ADR 후보)** 전체 본문.
+
+## Prompt: ⑮ design-packages
+
+선행: ⑤, ⑭ 권장. `package-architect`로 **`docs/packages.md`(또는 candidate)** 전체 본문.
+
+## Markdown: Phase 6 — 평가·배포·모듈 (⑯~⑱)
+
+| 커맨드 | 동작 | 사용자 추가 입력 | 샘플 |
+|--------|------|------------------|------|
+| ⑯ `evaluate-candidates` | `docs/decision/evaluations.md` | 가중치·필수 조건 | "비용 가중치 낮음, 오픈소스 필수" |
+| ⑰ `integrate-deployment` | `docs/deployment.md` | 환경 이름 | "dev/stage/prod, prod만 TLS 종단" |
+| ⑱ `integrate-module` | `docs/module-integration.md` 등 | 단일 정본 파일명 합의 | "`docs/module.md`로 통일" |
+
+## Prompt: ⑯ evaluate-candidates
+
+선행: ⑩~⑮로 candidate가 채워졌다고 가정. `candidate-evaluator`로 **`docs/decision/evaluations.md` 전체 본문**. ADR만 쓰는 팀이면 “ADR 매핑 표”로 대체 가능 문구 포함.
+
+## Prompt: ⑰ integrate-deployment (`docs/deployment.md`)
+
+선행: ⑯. `system-architect`로 **`docs/deployment.md` 전체 본문**. 룰 `design-principles-deployment-documentation.mdc`의 **11개 절** 목차를 빠짐없이 포함(해당 없음은 사유 한 줄).
+
+## Prompt: ⑱ integrate-module (`docs/module.md` 등)
+
+선행: ⑯⑰. `module-architect`로 **단일 정본** `docs/module.md`(또는 `module-integration.md`) **전체 본문**: 모듈·레이어·의존성 방향.
+
+## Markdown: Phase 7 — 구조 명세 통합 (⑲)
+
+| 커맨드 | 동작 | 사용자 추가 입력 | 샘플 |
+|--------|------|------------------|------|
+| ⑲ `/design-principles/specify-architecture` | `docs/architecture-specification.md` | `architecture.md`와 역할 분담 | "`architecture.md`는 API·경계 정본, 통합본은 중복 최소" |
+
+## Prompt: ⑲ specify-architecture (`docs/architecture-specification.md`)
+
+선행: ①~⑱ 관련 산출. `architecture-specifier`로 **`docs/architecture-specification.md` 전체 본문**. 동시에 **`docs/architecture.md`** 가 비어 있으면 **정본으로 쓸 `architecture.md` 초안 전체 본문**도 이어서 출력(두 파일 모두 펜스로 구분).
+
+## Markdown: Phase 8 — 분석·평가 (⑳㉑)
+
+| 커맨드 | 동작 | 사용자 추가 입력 | 샘플 |
+|--------|------|------------------|------|
+| ⑳ `analyze-architecture` | 구조 결정 추출 | 추출 깊이 | "ADR 후보만, 세부 코드 없음" |
+| ㉑ `evaluate-architecture` | 품질과의 갭 | 릴리스 블로커 정의 | "SLO 미달이면 블로커" |
+
+## Prompt: ⑳ analyze-architecture
+
+선행: ⑲. `architecture-analyzer`로 **`docs/architecture-analysis.md` 전체 본문**.
+
+## Prompt: ㉑ evaluate-architecture
+
+선행: ⑳, ⑥~⑨. `architecture-evaluator`로 **`docs/architecture-evaluation.md` 전체 본문**: 갭·로드맵·ADR 링크.
+
+## Markdown: 구현 준비 (㉒㉓) — 스킬·룰 연계
+
+| 커맨드 | 동작 | 스킬·룰 | 사용자 추가 입력 | 샘플 |
+|--------|------|---------|------------------|------|
+| ㉒ `assign-worker` | `work-assignments.md`, 선택 `AGENTS.md` | — | 담당자 팀 규모 | "백엔드 2, 프론트 1" |
+| ㉓ `generate-code` | 허가 모듈만 스캐폴드 | `collaborative-design-first` 준수 | **허가 모듈 목록** | "`api`만 이번 PR" |
+
+**ADR이 필요하면** 이 단계 전에 별도 대화로 `adr-authoring` 스킬을 적용해 `docs/adr/NNNN-title.md`를 추가한다.
+
+## Prompt: ㉒ assign-worker (`docs/work-assignments.md`)
+
+선행: ⑲⑰⑱. `work-assigner`로 **`docs/work-assignments.md` 전체 본문**과, 필요 시 **`AGENTS.md`** 초안 전체 본문.
+
+## Prompt: ㉓ generate-code (허가 모듈 스캐폴드)
+
+선행: ㉒ 및 **00단계의 허가 모듈 목록**. `code-generator` 규칙: **허가된 모듈만** 최소 스캐폴딩. 설계와 다른 추측 금지.
+
+출력 형식:
+1. 스캐폴드할 **트리 목록**(경로만).
+2. 각 파일마다 **파일 경로를 언어 태그로 한 코드 펜스**(예: 펜스 시작줄에 `src/main.ts`처럼 경로만 표기)로 **저장 가능한 전체 내용**을 제시한다.
+3. **테스트/빌드** 한 줄 명령(npm test, pytest 등 확정 브리프에 맞게).
+
+허가 범위를 벗어나면 코드 대신 **질문 목록**만 출력한다.
+
+## Markdown: 종료 체크리스트
+
+`docs/design-principles-command-execution-guide.md` **§6 체크리스트**를 만족하는지 스스로 검사한 표(항목·충족 여부·비고)를 적는 **마지막 요약 Prompt** 전에, 사용자가 수동으로 확인할 항목:
+
+- [ ] `docs/` 아래 독자 순서대로 링크 가능한가
+- [ ] ①~㉓에 대응하는 산출이 모두 존재하는가(생략 시 흡수 한 줄이 있는가)
+- [ ] `deployment.md` 11절, 필수 산출물 표(`design-principles-project-deliverables`)와 모순이 없는가
+
+## Prompt: (선택) 마무리 — DESIGN-INTEGRATED 허브
+
+`docs/DESIGN-INTEGRATED.md` **선택 허브**를 만든다면 **`DESIGN-INTEGRATED.md` 전체 본문**: 산출물 경로·역할·상태(있음/부분/예정) 표와 독자용 읽기 순서만 간결히.

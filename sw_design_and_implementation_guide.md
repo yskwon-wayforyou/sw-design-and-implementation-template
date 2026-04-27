@@ -151,6 +151,7 @@ flowchart LR
 |------|------|
 | [README.md](README.md) | 템플릿 소개·복사 방법 요약 |
 | [docs/design-principles-command-execution-guide.md](docs/design-principles-command-execution-guide.md) | 커맨드 23개 전후관계·에이전트 지시문 |
+| [docs/agent-notebook/design-principles-full-stack-workflow.aanb](docs/agent-notebook/design-principles-full-stack-workflow.aanb) | 커맨드 ①~㉓을 Agent Notebook에서 순차 실행하는 전 주기 워크플로 |
 | [.cursor/rules/design-principles/workflow.md](.cursor/rules/design-principles/workflow.md) | Phase 1~8 정의 |
 
 ---
