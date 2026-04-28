@@ -10,3 +10,5 @@
 
 - 일반 SW: `design-principles-full-stack-workflow.aanb`
 - AI·ML 포함: `ai_sw_design_full_stack_workflow.aanb`
+
+노트북 **㉓ 직후 ㉑A**에서 제품 `docs/`에 `DESIGN-INTEGRATED.md`·`architect-overview.md`를 두는 것이 템플릿 기본이다.

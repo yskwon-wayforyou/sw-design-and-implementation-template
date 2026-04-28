@@ -117,7 +117,7 @@
 | ⑰ 배포 | 모델 아티팩트·비밀·관측·윤리 검토 파이프라인 |
 | ADR | 위험 큰 선택은 반드시 ADR |
 
-에이전트 노트북: [`docs/agent-notebook/ai_sw_design_full_stack_workflow.aanb`](agent-notebook/ai_sw_design_full_stack_workflow.aanb) — 동일 ①~㉓ 축에 AI 프롬프트 보강.
+에이전트 노트북: [`docs/agent-notebook/ai_sw_design_full_stack_workflow.aanb`](agent-notebook/ai_sw_design_full_stack_workflow.aanb) — 동일 ①~㉓ 축에 AI 프롬프트 보강. **㉓ 직후 ㉑A**로 `DESIGN-INTEGRATED.md`(전체 설계 통합)·`architect-overview.md`(Architect 개요)를 필수 산출한다.
 
 ---
 

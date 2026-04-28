@@ -9,4 +9,6 @@
 | [agent-notebook/design-principles-full-stack-workflow.aanb](./agent-notebook/design-principles-full-stack-workflow.aanb) | 일반 SW 전 주기 노트북(①~㉓) |
 | [agent-notebook/ai_sw_design_full_stack_workflow.aanb](./agent-notebook/ai_sw_design_full_stack_workflow.aanb) | 동일 축 + AI 브리프·품질 보강 |
 
-루트 진입: [../sw_design_and_implementation_guide.md](../sw_design_and_implementation_guide.md).
+**제품 `docs/`에 두는 통합 산출(노트북 ㉑A·가이드 §1·§6)**: `DESIGN-INTEGRATED.md`, `architect-overview.md`.
+
+루트 진입: [../sw_design_and_implementation_guide.md](../sw_design_and_implementation_guide.md). 라이선스·기여: [../LICENSE](../LICENSE), [../CONTRIBUTING.md](../CONTRIBUTING.md).

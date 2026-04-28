@@ -156,6 +156,8 @@ flowchart LR
 | [docs/agent-notebook/design-principles-full-stack-workflow.aanb](docs/agent-notebook/design-principles-full-stack-workflow.aanb) | 커맨드 ①~㉓을 Agent Notebook에서 순차 실행하는 전 주기 워크플로 |
 | [docs/agent-notebook/ai_sw_design_full_stack_workflow.aanb](docs/agent-notebook/ai_sw_design_full_stack_workflow.aanb) | 위와 동일 축 + AI 브리프·추론/운영 이중 QA 보강 |
 | [ai_sw_design_full_stack_workflow.aanb](ai_sw_design_full_stack_workflow.aanb) | 루트 복사본(에이전트 노트북에서 열 때는 `docs/agent-notebook/` 쪽 권장) |
+| [LICENSE](LICENSE) | MIT 라이선스 |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | 기여·PR 시 설계 산출물·㉑A 통합 규칙 |
 | [.cursor/rules/design-principles/workflow.md](.cursor/rules/design-principles/workflow.md) | Phase 1~8 정의 |
 
 ---

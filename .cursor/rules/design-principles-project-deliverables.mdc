@@ -29,13 +29,18 @@ alwaysApply: false
 | 4 품질 | `docs/quality/scenarios.md` | QJ·속성·허용 기대(측정 가능하게) |
 | 4 품질 (AI·ML 포함 시 권장) | `docs/ai_quality_profile.md` | 응용 유형·고영향 여부·필수 QA·주요 Trade-off 한 장(없으면 `qualities.md` 서두에 흡수 사유) |
 | 5–7 후보~구조 명세 | `docs/architecture.md` | 공개 인터페이스·비기능·구조 뷰(바깥→안) |
+| 7 구조 명세 통합 | `docs/architecture-specification.md` | 종합 구조 설계(⑲): 개요·최종 구조·다이어그램·비기능·제약, `architecture.md`와 역할 분담 |
+| 8 구조 분석 | `docs/architecture-analysis.md` | 구조적 의사결정 추출(⑳) |
+| 8 구조 평가 | `docs/architecture-evaluation.md` | 품질 시나리오 대비 갭·로드맵(㉑) |
+| 마무리(전 주기) | `docs/DESIGN-INTEGRATED.md` | **통합 설계**: 산출물 표·상태·가이드와 동일한 독자 읽기 순서(㉑A) |
+| 마무리(전 주기) | `docs/architect-overview.md` | **Architect 문서**: 맥락·경계·구조 산출 역할·ADR·품질·배포 링크(㉑A) |
 | 전 Phase | `docs/adr/*.md` | **구조에 영향 있는 결정**은 ADR로 채택 기록 |
 | 전 Phase | `docs/asr.md` 또는 동등 분절 | **아키텍처 유의 요구** ID·우선순위·검증 힌트 |
 
 ### 3.1 선택·통합 규칙
 
 - `docs/domain/UC-*.md`, `docs/quality/QS-*.md`, `docs/candidate/*`, `docs/decision/*` 등은 **필요 시**만 둔다. 생략하면 **어느 ADR·`architecture.md`·QJ에 흡수했는지** 한 줄이라도 남긴다.  
-- **통합 설계** 파일이 있으면(예: `DESIGN-INTEGRATED.md`), 위 산출물은 **§ 색인 표**로 한눈에 링크·상태(있음/부분/예정)를 적는다.
+- **전 주기(노트북 Run All 또는 동등)** 를 수행하면 `DESIGN-INTEGRATED.md`·`architect-overview.md`는 **필수**이며, 위 산출물을 **§ 색인 표**로 링크·상태(있음/부분/예정)를 적는다.
 
 ## 4. 통합 설계 허브에 넣을 요약
 
@@ -44,7 +49,7 @@ alwaysApply: false
 
 ## 5. 에이전트·저자 체크리스트
 
-1. `system.md`·`business.md`·`usecases.md`·`usecase/`·`domain/model.md`·`quality/scenarios.md`·`architecture.md`가 **요구 범위에 대해** 채워졌는가?  
+1. `system.md`·`business.md`·`usecases.md`·`usecase/`·`domain/model.md`·`quality/scenarios.md`·`architecture.md`가 채워졌는가? (⑲~㉑에서 다룬 경우 `architecture-specification.md` 등 동반 산출 포함; 생략은 `DESIGN-INTEGRATED.md` 또는 `open-issues.md`에 사유)  
 2. 구조 결정이 **ADR**에 잡혀 있는가(번호·제목·상태)?  
 3. ASR(또는 동등)이 **요구 ID**로 추적 가능한가?  
-4. 통합 설계(또는 README)에 **색인·상태**가 갱신되었는가?
+4. **`DESIGN-INTEGRATED.md`·`architect-overview.md`**에 색인·상태·Architect 안내가 갱신되었는가?

@@ -8,7 +8,7 @@
 
 ## 1. 일반적인 설계·아키텍처 문서가 갖추면 좋은 순서 (독자 관점)
 
-독자가 **한 번에 맥락을 잡도록** 아래 순서로 최종 패키지를 구성하는 것을 권장한다. (파일명은 프로젝트에 맞게 조정; 선택으로 `DESIGN-INTEGRATED.md` 허브를 `docs/`에 둔다.)
+독자가 **한 번에 맥락을 잡도록** 아래 순서로 최종 패키지를 구성하는 것을 권장한다. **Agent Notebook 전 주기**를 끝내면 `DESIGN-INTEGRATED.md`·`architect-overview.md`를 **필수**로 둔다(㉑A).
 
 | 순서 | 독자가 얻는 것 | 대표 산출물(관례) |
 |------|----------------|-------------------|
@@ -21,7 +21,8 @@
 | 7 | **어떻게 배포·운영하는가** | `deployment.md` |
 | 8 | **구조 한 장** — 인터페이스·비기능·뷰 | `architecture.md` |
 | 9 | **결정의 근거** — 채택/기각 | `adr/*`, (선택) `decision/*` |
-| 10 | **통합 허브**(선택) | `DESIGN-INTEGRATED.md` |
+| 10 | **통합 설계(전체)** — 색인·상태·읽기 순서 | `DESIGN-INTEGRATED.md` |
+| 11 | **Architect 한눈에** — 맥락·경계·구조 산출 역할 | `architect-overview.md` |
 
 **시각 자료**: 절이 무거우면 `.cursor/agents/doc-image-designer.md`에 “이 절의 한 줄 목표 + 배치”를 지시해 Mermaid·이미지 브리프를 넣는다.  
 **제출용 PDF**: `.cursor/agents/design-pdf-publisher.md`로 매니페스트·검수 후보낸다.
@@ -43,10 +44,11 @@
 | 7 | 구조 명세 통합 | ⑲ |
 | 8 | 구조 분석·평가 | ⑳㉑ |
 | 구현 준비 | 작업 배정·코드 | ㉒㉓ |
+| 통합 패키지 | 전체 설계·Architect 산출(노트북 ㉑A, 슬래시 커맨드 없음) | ㉑A |
 
 ---
 
-## 3. 커맨드 전체 실행 순서 (23개, 전후 관계 반영)
+## 3. 커맨드 전체 실행 순서 (23개 + ㉑A, 전후 관계 반영)
 
 **공통 전제**: Cursor에서 **단위 프로젝트 루트**(예: 모노레포의 `services/foo/`)를 작업 디렉터리로 두고, 각 커맨드 실행 시 에이전트에게 **같은 루트의 `docs/`** 에만 쓰라고 명시한다.
 
@@ -307,6 +309,17 @@
 
 ---
 
+### ㉑A 통합 설계·Architect 산출 (슬래시 커맨드 없음, 노트북·가이드 공통)
+
+| 항목 | 내용 |
+|------|------|
+| **선행** | ㉓까지(코드 스캐폴드 없으면 `DESIGN-INTEGRATED.md` 표에 “㉓ 생략”으로 기록). |
+| **에이전트 지시** | “`design-principles-project-deliverables` 및 본 가이드 **§1** 독자 순서와 모순 없이 **`docs/DESIGN-INTEGRATED.md`**(산출물 경로·역할·상태 표 + 읽기 순서)와 **`docs/architect-overview.md`**(아키텍트용: 맥락도 1개 이하, `architecture.md`·`architecture-specification.md`·`architecture-analysis.md`·`architecture-evaluation.md` 역할 안내, ADR·품질·배포·모듈·작업배정 링크)를 작성한다.” |
+| **산출** | `docs/DESIGN-INTEGRATED.md`, `docs/architect-overview.md` |
+| **후행** | 없음(또는 CI·리뷰 루프) |
+
+---
+
 ## 4. 병렬로 줄일 수 있는 구간
 
 - **⑩⑪⑫**: 서로 다른 품질 관점 후보 — 인력이 나뉘면 병렬 실행 후 **한 번에 `candidate/candidates.md`를 합친다**.  
@@ -317,7 +330,8 @@
 
 ## 5. 산출물 정리 시 (참고)
 
-- 통합 허브(선택): `docs/DESIGN-INTEGRATED.md` — ⑲ 이후 **허브에 링크·상태 표**를 갱신하면 “최종 패키지” 읽기 순서와 맞는다.  
+- 통합 허브(필수, ㉑A): `docs/DESIGN-INTEGRATED.md` — §1과 동일한 **독자 순서**로 링크·상태 표를 유지한다.  
+- Architect 개요(필수, ㉑A): `docs/architect-overview.md` — 구조 산출물 역할 분담과 운영 링크를 한 곳에 모은다.  
 - 기술 솔루션 후보: `docs/candidate/solutions.md` — ⑬의 결과물.  
 - 배포: `docs/deployment.md`(⑰와 경로 정렬).  
 - ADR이 `decision/decisions.md` 역할을 대신하는 경우 ⑯ 산출을 **ADR 목록과 매핑 표**로 대체해도 된다.
@@ -329,4 +343,5 @@
 - [ ] `docs/` 아래에 §1 표의 **독자 순서**로 읽을 수 있는가?  
 - [ ] `workflow.md` Phase 1~8에 해당하는 산출이 **빈 칸 없이 링크**되는가?  
 - [ ] 위 **①~㉓ 커맨드를 모두** 실행·기록(로그 또는 PR 설명)했는가?  
+- [ ] **㉑A**로 `docs/DESIGN-INTEGRATED.md`, `docs/architect-overview.md`가 채워졌는가(노트북 Run All 또는 수동 동등 산출)?  
 - [ ] 제출용 PDF가 필요하면 `design-pdf-publisher`로 **전수 검수** 후 저장했는가?

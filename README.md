@@ -29,4 +29,4 @@
 - **실행 순서 정본**: `docs/design-principles-command-execution-guide.md`  
 - **샘플**: [`samples/README.md`](./samples/README.md)
 
-라이선스·기여 정책은 저장소 소유자가 추가하면 된다.
+라이선스: [LICENSE](./LICENSE) (MIT). 기여: [CONTRIBUTING.md](./CONTRIBUTING.md).
