@@ -25,6 +25,11 @@ notebook_system_prompt: >
   스킬: 구조적 결정 기록은 `.cursor/skills/adr-authoring/SKILL.md` 템플릿(대안 3개 이상)을 따른다. 폴더형
   이해 문서가 필요하면 `.cursor/skills/folder-based-explanation-docs/SKILL.md`를 따른다.
 
+  AI·ML 트랙: 브리프에 학습·추론·LLM·RAG·에이전트가 포함되면 **Agent Notebook은**
+  `docs/agent-notebook/ai_sw_design_full_stack_workflow.aanb`(동일 ①~㉓, 00·①·⑥~⑨ 보강) 사용을 권장한다.
+  개념 정본은 `docs/ai_sw_design_methodology.md`, 룰 `design-principles-ai-system-quality`,
+  스킬 `ai-specialist-system-design`이다.
+
   응답 언어: **한국어** 기술 문체. 약어는 첫 등장 시 풀어 쓴다.
 
   **이전 Prompt 셀의 출력**이 제공되면 그것을 선행 산출물로 간주하고 파일 간 교차 참조·용어 일관성을 유지한다.
@@ -53,6 +58,8 @@ llm_config:
 ## Markdown: 목적·두 가지 실행 모드
 
 이 노트북은 [sw_design_and_implementation_guide.md](../../sw_design_and_implementation_guide.md)와 [design-principles-command-execution-guide.md](../design-principles-command-execution-guide.md)의 **①~㉓** 흐름을 **Agent Notebook에서 순차 실행**할 때 쓴다.
+
+**AI·ML·LLM·RAG·에이전트**가 제품에 포함되면 동일 축에 품질·브리프가 보강된 [ai_sw_design_full_stack_workflow.aanb](./ai_sw_design_full_stack_workflow.aanb) 사용을 권장한다.
 
 ### 모드 A — Cursor + 커맨드(권장)
 
@@ -274,6 +281,7 @@ llm_config:
 - [ ] `docs/` 아래 독자 순서대로 링크 가능한가
 - [ ] ①~㉓에 대응하는 산출이 모두 존재하는가(생략 시 흡수 한 줄이 있는가)
 - [ ] `deployment.md` 11절, 필수 산출물 표(`design-principles-project-deliverables`)와 모순이 없는가
+- [ ] (ML·LLM 등 해당 시) `ai_sw_design_full_stack_workflow.aanb`·`ai_sw_design_methodology.md`와 정합을 맞췄는가 — 해당 없으면 “해당 없음” 한 줄
 
 ## Prompt: (선택) 마무리 — DESIGN-INTEGRATED 허브
 
