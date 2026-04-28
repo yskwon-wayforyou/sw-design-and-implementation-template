@@ -165,3 +165,7 @@
 - 대량의 산출물 생성이 필요한 경우 한 번에 모두 생성하지 말고 단계별로 분할
 - 긴 응답이 예상되는 경우 작업을 작은 단위로 나누어 수행
 - 사용자에게 진행 상황을 알리며 단계적으로 완료
+
+### 8. AI·ML 시스템과 일반 SW 품질 (보강)
+
+학습·추론·LLM·RAG·에이전트가 **시스템 경계 안**에 있으면, 품질 요구사항을 **추론 중심**(기능 정확성·강건성·프라이버시·공정성·수행 효율성)과 **운영 중심**(기능 적응성·제어 가능성·설명 용이성)으로 나누어 Utility Tree와 시나리오에 반영한다. 정의·Trade-off·응용 유형 표는 **`docs/ai_sw_design_methodology.md`** 및 룰 **`design-principles-ai-system-quality.mdc`** 를 따른다. 체크리스트는 스킬 **`.cursor/skills/ai-specialist-system-design/SKILL.md`** 를 참고한다.

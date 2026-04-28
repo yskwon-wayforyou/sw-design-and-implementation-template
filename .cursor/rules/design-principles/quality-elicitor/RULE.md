@@ -81,6 +81,17 @@ alwaysApply: false
 - **배포 용이성 (Deployability)**: 배포 시간, 롤백 용이성
 - **상호 운용성 (Interoperability)**: 외부 시스템 연동 용이성
 
+### 3A. AI·ML 시스템일 때 추가 분류 (필수: `system.md`/브리프에 학습·추론·LLM·RAG·에이전트가 있을 때)
+
+`docs/ai_sw_design_methodology.md` 및 룰 `design-principles-ai-system-quality.mdc`를 따른다.
+
+- **추론 중심 QA**: 기능 정확성, 강건성, 프라이버시, 공정성, 수행 효율성 — 학습·추론 경로(데이터 준비, 입력/출력 가드레일, 서빙)와 연결된 시나리오.
+- **운영 중심 QA**: 기능 적응성, 제어 가능성, 설명 용이성 — 드리프트 대응, 휴먼 인 더 루프, 승인·롤백, 근거·출처 표시.
+- **데이터 품질**: 라벨·분포·편향·드리프트·PII — 별도 Utility 분기로 두고 QS화.
+- **침묵하는 실패(Silent failure)**: 정상 로그 속 오출력 — 모니터링(확신·분포·도메인 룰 위반), 가드레일 차단율, 사후 샘플 감사를 측정 가능하게 포함.
+
+Utility Tree의 Mermaid **루트에서** `AI추론` / `AI운영` / `데이터품질` / `전통NFR`(성능·가용성 등)을 병렬 분기할 수 있다.
+
 ### 4. Utility Tree 구성
 품질 분류로부터 Utility Tree를 구성:
 

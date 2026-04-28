@@ -8,3 +8,7 @@ Thumbs.db
 
 # Sample execution outputs (generated)
 samples/_run/
+
+# Local PDF lecture extraction (not part of template)
+.venv-pdf/
+.lecture_extract/

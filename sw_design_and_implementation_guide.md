@@ -134,7 +134,8 @@ flowchart LR
 ## 5. ADR·설명 문서 스킬
 
 - 구조적 결정 기록: [`.cursor/skills/adr-authoring/SKILL.md`](.cursor/skills/adr-authoring/SKILL.md)  
-- 이해용 폴더 구조·Mermaid: [`.cursor/skills/folder-based-explanation-docs/SKILL.md`](.cursor/skills/folder-based-explanation-docs/SKILL.md)
+- 이해용 폴더 구조·Mermaid: [`.cursor/skills/folder-based-explanation-docs/SKILL.md`](.cursor/skills/folder-based-explanation-docs/SKILL.md)  
+- AI·ML 시스템 설계(SWO): [`.cursor/skills/ai-specialist-system-design/SKILL.md`](.cursor/skills/ai-specialist-system-design/SKILL.md) — 개념 정본은 [`docs/ai_sw_design_methodology.md`](docs/ai_sw_design_methodology.md)
 
 ---
 
@@ -151,7 +152,10 @@ flowchart LR
 |------|------|
 | [README.md](README.md) | 템플릿 소개·복사 방법 요약 |
 | [docs/design-principles-command-execution-guide.md](docs/design-principles-command-execution-guide.md) | 커맨드 23개 전후관계·에이전트 지시문 |
+| [docs/ai_sw_design_methodology.md](docs/ai_sw_design_methodology.md) | AI 전문가(SWO) 관점 품질·가드레일·Trade-off·워크플로 매핑 |
 | [docs/agent-notebook/design-principles-full-stack-workflow.aanb](docs/agent-notebook/design-principles-full-stack-workflow.aanb) | 커맨드 ①~㉓을 Agent Notebook에서 순차 실행하는 전 주기 워크플로 |
+| [docs/agent-notebook/ai_sw_design_full_stack_workflow.aanb](docs/agent-notebook/ai_sw_design_full_stack_workflow.aanb) | 위와 동일 축 + AI 브리프·추론/운영 이중 QA 보강 |
+| [ai_sw_design_full_stack_workflow.aanb](ai_sw_design_full_stack_workflow.aanb) | 루트 복사본(에이전트 노트북에서 열 때는 `docs/agent-notebook/` 쪽 권장) |
 | [.cursor/rules/design-principles/workflow.md](.cursor/rules/design-principles/workflow.md) | Phase 1~8 정의 |
 
 ---

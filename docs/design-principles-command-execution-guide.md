@@ -26,6 +26,8 @@
 **시각 자료**: 절이 무거우면 `.cursor/agents/doc-image-designer.md`에 “이 절의 한 줄 목표 + 배치”를 지시해 Mermaid·이미지 브리프를 넣는다.  
 **제출용 PDF**: `.cursor/agents/design-pdf-publisher.md`로 매니페스트·검수 후보낸다.
 
+**AI 전문가(SWO) 확장**: 학습·추론·LLM·RAG·에이전트가 시스템 경계에 포함되면 [ai_sw_design_methodology.md](./ai_sw_design_methodology.md)와 룰 [`design-principles-ai-system-quality.mdc`](../.cursor/rules/design-principles-ai-system-quality.mdc)를 함께 본다. 스킬: [`.cursor/skills/ai-specialist-system-design/SKILL.md`](../.cursor/skills/ai-specialist-system-design/SKILL.md). 동일 커맨드 ①~㉓을 **AI 브리프·품질 Utility Tree 보강**과 함께 쓰려면 Agent Notebook [`agent-notebook/ai_sw_design_full_stack_workflow.aanb`](agent-notebook/ai_sw_design_full_stack_workflow.aanb)를 사용한다.
+
 ---
 
 ## 2. Phase ↔ 커맨드 대응 (요약)
