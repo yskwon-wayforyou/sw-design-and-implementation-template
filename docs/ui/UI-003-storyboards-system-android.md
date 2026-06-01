@@ -77,7 +77,7 @@ flowchart TB
 sequenceDiagram
   participant Mac as MainWindow
   participant Badge as QToolButton approval_badge
-  participantDlg as ApprovalDialog
+  participant Dlg as ApprovalDialog
   Mac->>Badge: setText count
   Badge->>Dlg: clicked show queue pick
   Dlg->>Dlg: user Approve
@@ -223,34 +223,60 @@ macOS: `QMessageBox` 또는 `OfflineOverlay` `QWidget` on `workspace_stack`.
 ## MVP 화면 목록
 
 ```mermaid
-mindmap
+flowchart TB
   root((MVP_Screens))
-    Onboarding
-      SCR_000
-      SCR_001
-      SCR_002
-    Shell_Common
-      SCR_SHELL
-      SCR_HOME
-      SCR_QUOTE
-      SCR_CHART
-      SCR_ORDER
-      SCR_HIST
-      SCR_MKT
-    Modes
-      SCR_MODE_DAY
-      SCR_MODE_LONG
-      SCR_MODE_AI
-      SCR_ML
-    System
-      SCR_SETTINGS
-      SCR_APPROVAL
-      SCR_RISK
-      SCR_OFFLINE
-    Android
-      SCR_AND_PAIR
-      SCR_AND_SHELL
-      SCR_AND_APPROVAL
+  Onboarding["Onboarding"]
+  root --> Onboarding
+  SCR_000["SCR_000"]
+  Onboarding --> SCR_000
+  SCR_001["SCR_001"]
+  Onboarding --> SCR_001
+  SCR_002["SCR_002"]
+  Onboarding --> SCR_002
+  Shell_Common["Shell_Common"]
+  root --> Shell_Common
+  SCR_SHELL["SCR_SHELL"]
+  Shell_Common --> SCR_SHELL
+  SCR_HOME["SCR_HOME"]
+  Shell_Common --> SCR_HOME
+  SCR_QUOTE["SCR_QUOTE"]
+  Shell_Common --> SCR_QUOTE
+  SCR_CHART["SCR_CHART"]
+  Shell_Common --> SCR_CHART
+  SCR_ORDER["SCR_ORDER"]
+  Shell_Common --> SCR_ORDER
+  SCR_HIST["SCR_HIST"]
+  Shell_Common --> SCR_HIST
+  SCR_MKT["SCR_MKT"]
+  Shell_Common --> SCR_MKT
+  Modes["Modes"]
+  root --> Modes
+  SCR_MODE_DAY["SCR_MODE_DAY"]
+  Modes --> SCR_MODE_DAY
+  SCR_MODE_LONG["SCR_MODE_LONG"]
+  Modes --> SCR_MODE_LONG
+  SCR_MODE_AI["SCR_MODE_AI"]
+  Modes --> SCR_MODE_AI
+  SCR_ML["SCR_ML"]
+  Modes --> SCR_ML
+  System["System"]
+  root --> System
+  SCR_SETTINGS["SCR_SETTINGS"]
+  System --> SCR_SETTINGS
+  SCR_APPROVAL["SCR_APPROVAL"]
+  System --> SCR_APPROVAL
+  SCR_RISK["SCR_RISK"]
+  System --> SCR_RISK
+  SCR_OFFLINE["SCR_OFFLINE"]
+  System --> SCR_OFFLINE
+  Android["Android"]
+  root --> Android
+  SCR_AND_PAIR["SCR_AND_PAIR"]
+  Android --> SCR_AND_PAIR
+  SCR_AND_SHELL["SCR_AND_SHELL"]
+  Android --> SCR_AND_SHELL
+  SCR_AND_APPROVAL["SCR_AND_APPROVAL"]
+  Android --> SCR_AND_APPROVAL
 ```
 
 ---

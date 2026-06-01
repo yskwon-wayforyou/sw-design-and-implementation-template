@@ -135,11 +135,14 @@
 
 | 신호 | 위치 |
 |------|------|
-| 앱 로그 | `~/.YSTrading/logs/` |
-| 감사 | EventStore |
+| 앱 로그 | `~/.YSTrading/logs/` (JSON line, 마스킹) |
+| 감사 | EventStore `audit_events` append-only |
+| SLO 롤업 | `~/.YSTrading/metrics/` |
 | CI | GitHub Actions Summary |
 
-알람: v1 수동(로그 tail). Datadog 등 클라우드 APM — **해당 없음(개인 v1)**.
+알람: v1 수동(로그 tail). SLO 위반·S1~S4: [REL-001](reliability/REL-001-slo-resilience-patterns.md) §8.
+
+**RPO/RTO**: RPO 24h, RTO 15min — [REL-001](reliability/REL-001-slo-resilience-patterns.md) §5.
 
 ---
 
@@ -166,6 +169,8 @@
 | CI | live 주문 API **호출 금지** |
 | 키 회전 | KIS 포털 폐기 → blob 재생성 → 재빌드 |
 | APK | 개인 sideload; 스토어 공개 비목표 |
+| 위협·통제 | [SEC-001](security/SEC-001-threat-model-and-controls.md) |
+| Hub | 세션 토큰·rate limit ([QS-017](quality/QS-017-hub-session-security.md)) |
 
 ---
 

@@ -178,4 +178,4 @@ def propose_action(ctx: MarketContext) -> ActionProposal | None: ...
 - [x] SyncHub API 초안
 - [x] 신규 `trading_modes` 경계
 
-**다음 Phase**: 7 `architecture.md` 통합, 8 평가 — **피드백 후**
+**통합 명세**: [ARC-000-architecture.md](../ARC-000-architecture.md) (Phase 7~8 완료)

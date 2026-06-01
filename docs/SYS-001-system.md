@@ -5,7 +5,7 @@
 | TraceID | SYS-001 |
 | 문서 ID | SYS-AST-001 |
 | 버전 | 0.1 (Phase 1 산출) |
-| 상태 | 초안 — Phase 7~8·피드백 대기 |
+| 상태 | Phase 7~8 반영 — 통합 명세 [ARC-000-architecture.md](ARC-000-architecture.md) |
 | 근거 요구 | [../doc/01-requirements.md](../doc/01-requirements.md), [../doc/12-requirements-and-quality-attributes-ko.md](../doc/12-requirements-and-quality-attributes-ko.md), 사용자 확장 요구(2026-06) |
 
 ---
@@ -119,6 +119,7 @@ flowchart TB
 | C-05 | 비밀은 로컬 볼트·환경변수 | 채팅·커밋·로그 마스킹 |
 | C-06 | 교육·개인 참고 구현 | 면책·RiskGuard 강화 |
 | C-07 | Android는 v1 **기능 패리티 목표**, 네이티브 HTS 성능 아님 | 동기 API·Web 셸 또는 원격 UI |
+| C-08 | **상용급** 안전·신뢰·보안 기준 ([QLT-002](QLT-002-commercial-quality-baseline.md)) — live/AI 릴리스 게이트 | ASR-015~022, [ARC-004](architecture/ARC-004-resilience-security-crosscut.md) |
 
 ---
 

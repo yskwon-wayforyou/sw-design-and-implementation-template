@@ -16,7 +16,7 @@ flowchart TD
   os[OrderService]
 
   infer --> setting
-  setting -->|false 기본| gate
+  setting -->|"false 기본"| gate
   gate -->|approved| rg
   setting -->|true| rg
   rg --> os

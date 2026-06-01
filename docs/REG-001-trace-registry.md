@@ -68,6 +68,48 @@
 | OPS-IDX-001 | `operations/README.md` | 운영·CI/CD·MLOps 폴더 진입 |
 | OPS-001 | `operations/OPS-001-github-cicd.md` | GitHub Actions CI/CD 설계 |
 | OPS-002 | `operations/OPS-002-devops-mlops.md` | DevOps · MLOps 적용 설계 |
+| ADR-009 | `adr/ADR-009-commercial-quality-security-baseline.md` | 상용급 품질·보안 기준선 |
+| QLT-002 | `QLT-002-commercial-quality-baseline.md` | 상용 NFR·SLO·릴리스 게이트 |
+| ARC-004 | `architecture/ARC-004-resilience-security-crosscut.md` | 복원력·보안 횡단 관심사 |
+| SEC-IDX-001 | `security/README.md` | 보안 설계 폴더 |
+| SEC-001 | `security/SEC-001-threat-model-and-controls.md` | 위협 모델·통제 |
+| REL-IDX-001 | `reliability/README.md` | 신뢰성·SLO 폴더 |
+| REL-001 | `reliability/REL-001-slo-resilience-patterns.md` | SLO·복원력 패턴 |
+| QS-013 | `quality/QS-013-stale-quote-and-fallback.md` | 시세 신선도·WS 폴백 |
+| QS-014 | `quality/QS-014-data-durability.md` | 데이터 내구성 |
+| QS-015 | `quality/QS-015-order-idempotency.md` | 주문 멱등성 |
+| QS-016 | `quality/QS-016-circuit-breaker.md` | KIS Circuit Breaker |
+| QS-017 | `quality/QS-017-hub-session-security.md` | SyncHub 세션 보안 |
+| QS-018 | `quality/QS-018-audit-trail.md` | 금전 감사 추적 |
+| QS-019 | `quality/QS-019-supply-chain.md` | 공급망·SBOM |
+| QS-020 | `quality/QS-020-ml-data-integrity.md` | ML 데이터 무결성 |
+| DAT-IDX-001 | `data/README.md` | 데이터 원천·수집 폴더 |
+| DAT-001 | `data/DAT-001-external-sources-catalog.md` | 외부 원천 카탈로그 (뉴스·공시·시장) |
+| DAT-002 | `data/DAT-002-rnn-training-collection-flow.md` | RNN 학습 데이터·수집 Flow |
+| CND-IDX | `candidate/README.md` | 후보 구조 폴더 인덱스 |
+| CND-006 | `candidate/CND-006-mitigation-adopted.md` | 채택 후보 단점 보완 통합 |
+| ARC-000 | `ARC-000-architecture.md` | Phase 7 통합 구조 명세 (UI·로깅 포함) |
+| EVL-IDX-001 | `evaluation/README.md` | Phase 8 구조 평가 폴더 |
+| EVL-001 | `evaluation/EVL-001-architecture-decisions.md` | 구조적 의사결정 식별 |
+| EVL-002 | `evaluation/EVL-002-architecture-evaluation.md` | 최종 구조 평가 |
+| OPS-003 | `operations/OPS-003-logging-observability.md` | 로깅·관측 설계 |
+| OPS-004 | `operations/OPS-004-debugging-issue-intake.md` | 이슈 수집·디버깅 플레이북 |
+| SRV-IDX-001 | `survey/README.md` | 조사·서베이 폴더 |
+| SRV-001 | `survey/SRV-001-open-ml-models-and-data-survey.md` | 오픈 AI·학습 데이터 서베이 |
+| ADR-010 | `adr/ADR-010-open-ml-data-and-crossmodal-training.md` | Tier0·Alpha·crossmodal·v2 ML |
+| DAT-003 | `data/DAT-003-data-schemas.md` | 데이터 스키마 정본 |
+| IMPL-IDX-001 | `implementation/README.md` | 구현·테스트·진행 폴더 |
+| INT-001 | `implementation/INT-001-module-interfaces.md` | 모듈 인터페이스 |
+| PLAN-001 | `implementation/PLAN-001-implementation-schedule.md` | 구현 계획·일정 |
+| TRACK-001 | `implementation/TRACK-001-progress.md` | 구현 진행 체크리스트 |
+| TST-001 | `implementation/TST-001-testing-strategy.md` | TDD·pytest·NBDE·시나리오 |
+| TST-002 | `implementation/TST-002-scenario-html-report.md` | 시나리오 HTML 리포트·스크린샷 |
+| OPS-005 | `operations/OPS-005-backtest-procedure.md` | 백테스트·paper 검증 절차 |
+| ADR-011 | `adr/ADR-011-android-voice-nl-trading.md` | Android 음성·NL 매매 |
+| UC-013 | `usecase/UC-013-voice-nl-trading-android.md` | UC-013 음성·자연어 매매 |
+| DOM-013 | `domain/DOM-013-voice-nl-domain.md` | UC-013 도메인 |
+| UI-006 | `ui/UI-006-android-voice-nl.md` | Android 음성·NL UI |
+| QS-021 | `quality/QS-021-voice-nl-safety.md` | 음성·NL 안전 QS |
 
 ## 규칙
 
@@ -76,3 +118,5 @@
 - 본문 메타데이터 표에 `TraceID` 행 필수
 - 정본 목록: 본 레지스트리(`REG-001`)
 - UI 도식: **Mermaid만**; Qt6 위젯: `UI-QT6-000`
+- **평가표**: `TraceID` 열 옆에 **`제목`**(한 줄 요약) 필수; 선정·채택·기각이 있으면 **`평가 근거`** 열에 이유 기재 — 정본 [QEV-001](quality/QEV-001-evaluations.md), [DEC-002](decision/DEC-002-evaluations.md)
+- **Mermaid**: `mindmap`·`gitGraph` 사용 금지 → `flowchart`/`sequenceDiagram`; sequence에서 `And` 등 예약어 ID 금지; 괄호·슬래시 메시지는 `"따옴표"` — 점검 `scripts/fix-mermaid-syntax.py`

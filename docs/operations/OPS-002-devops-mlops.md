@@ -59,16 +59,17 @@ flowchart TB
 
 ### A.4 관측(Observability) v1
 
+**정본**: [OPS-003-logging-observability.md](OPS-003-logging-observability.md) (LOG-APP / LOG-AUD / LOG-ACC, `correlation_id`, 마스킹).  
+**이슈·디버깅**: [OPS-004-debugging-issue-intake.md](OPS-004-debugging-issue-intake.md) (Diagnostic Pack, 플레이북).
+
 | 신호 | 저장 | 보존 |
 |------|------|------|
-| 앱 로그 | `~/.YSTrading/logs/yst_{date}.log` | 30일 로테이션 |
+| 앱 로그 | `~/.YSTrading/logs/yst_{date}.log` (JSON line) | 30일 |
 | 감사 | EventStore `audit_events` | append-only |
-| SyncHub | uvicorn access log | 7일 |
-| 헬스 | `GET /healthz` (Hub), GUI 내부 tick | — |
+| SyncHub | `hub_access.log` | 7일 |
+| 헬스 | `GET /healthz` (Hub), GUI status | — |
 
 **최소 알람(수동)**: live 주문 실패 연속 N회 → 로그 ERROR + (선택) macOS 알림.
-
-**향후**: ASR 위반·RiskGuard 트립을 동일 로그 채널에 구조화(JSON line).
 
 ### A.5 릴리스·변경 관리
 
@@ -151,11 +152,13 @@ flowchart LR
   INF[AiTradingAddon_infer]
 
   ES --> EXP --> SEQ --> TR --> EV
-  EV -->|pass gates| REG
+  EV -->|"pass gates"| REG
   REG --> INF
 ```
 
 ### B.4 품질 게이트 (승격)
+
+백테스트 절차 상세: [OPS-005-backtest-procedure.md](OPS-005-backtest-procedure.md).
 
 | Gate | `candidate` → `paper` | `paper` → `live` |
 |------|----------------------|------------------|
@@ -249,7 +252,19 @@ flowchart TB
 
 ---
 
-## Part D — 구현 로드맵
+## Part D — SLO·Incident (상용)
+
+| 항목 | 정본 |
+|------|------|
+| SLO·CB·retry | [REL-001](../reliability/REL-001-slo-resilience-patterns.md) |
+| Incident S1~S4 | REL-001 §8 |
+| live 릴리스 게이트 | [QLT-002](../QLT-002-commercial-quality-baseline.md) §4 |
+
+로컬 메트릭 롤업: `~/.YSTrading/metrics/` (구현 예정).
+
+---
+
+## Part E — 구현 로드맵
 
 | 순서 | 항목 | 패키지/경로 |
 |------|------|-------------|

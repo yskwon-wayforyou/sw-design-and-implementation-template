@@ -108,6 +108,9 @@ packages/
       inference_bridge.py      # wraps ml_pipeline + addons protocol
       approval_gate.py
       service.py               # AiAutoService
+    nl_command/                # UC-013 [ADR-011]
+      parser_rules_ko.py
+      nl_service.py
     shared/                    # O-03 확정
       indicators.py
       normalize.py

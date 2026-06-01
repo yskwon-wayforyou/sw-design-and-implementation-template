@@ -25,25 +25,42 @@
 ## 2. 비즈니스 드라이버
 
 ```mermaid
-mindmap
+flowchart TB
   root((AST))
-    Speed
-      원클릭_시세반영
-      단축키_주문
-    Trust
-      KIS_공식_API
-      Tier_배지
-    Personalization
-      RNN_행동학습
-      모드별_UX
-    Safety
-      paper_live_분리
-      RiskGuard
-      AI_승인
-    Insight
-      단타_패턴제안
-      장기_추천
-      PnL_대시보드
+  Speed["Speed"]
+  root --> Speed
+  원클릭_시세반영["원클릭_시세반영"]
+  Speed --> 원클릭_시세반영
+  단축키_주문["단축키_주문"]
+  Speed --> 단축키_주문
+  Trust["Trust"]
+  root --> Trust
+  KIS_공식_API["KIS_공식_API"]
+  Trust --> KIS_공식_API
+  Tier_배지["Tier_배지"]
+  Trust --> Tier_배지
+  Personalization["Personalization"]
+  root --> Personalization
+  RNN_행동학습["RNN_행동학습"]
+  Personalization --> RNN_행동학습
+  모드별_UX["모드별_UX"]
+  Personalization --> 모드별_UX
+  Safety["Safety"]
+  root --> Safety
+  paper_live_분리["paper_live_분리"]
+  Safety --> paper_live_분리
+  RiskGuard["RiskGuard"]
+  Safety --> RiskGuard
+  AI_승인["AI_승인"]
+  Safety --> AI_승인
+  Insight["Insight"]
+  root --> Insight
+  단타_패턴제안["단타_패턴제안"]
+  Insight --> 단타_패턴제안
+  장기_추천["장기_추천"]
+  Insight --> 장기_추천
+  PnL_대시보드["PnL_대시보드"]
+  Insight --> PnL_대시보드
 ```
 
 | 드라이버 | 설명 | 설계 함의 |

@@ -1,0 +1,28 @@
+# ML feature schema — 정본은 docs/data/DAT-003-data-schemas.md
+schema_version: 2
+seq_len: 60
+
+groups:
+  price:
+    - return_1m
+    - return_5m
+    - log_return_1m
+  volume:
+    - volume_z_20
+  alpha_roll:
+    - rsi_14
+    - corr_price_vol_10
+  position:
+    - position_flag
+    - cash_ratio
+  time:
+    - minute_sin
+    - minute_cos
+  crossmodal_v15:
+    - crossmodal_disclosure_count_24h
+    - crossmodal_news_count_24h
+    - crossmodal_hours_since_disclosure
+    - crossmodal_has_disclosure_24h
+  sentiment_v2:
+    - sentiment_mean_24h
+    - sentiment_last

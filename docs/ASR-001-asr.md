@@ -5,7 +5,7 @@
 |------|------|
 | TraceID | ASR-001 |
 
-| 버전 | 0.1 |
+| 버전 | 0.2 |
 
 ---
 
@@ -27,6 +27,15 @@
 | **ASR-012** | 사용자 대면 UI 문자열: **일반 용어만** ([UI-004](ui/UI-004-plain-language-and-labels.md)) | Must | 라벨 감사·금지어 grep | 전 화면 |
 | **ASR-013** | macOS UI: **Cursor Light** 팔레트 ([UI-005](ui/UI-005-cursor-light-theme.md)) | Must | `QPalette` 토큰 테스트 | yst_ui |
 | **ASR-014** | CI/CD: **live 주문·실계좌 KIS 호출 금지**; mock/paper fixture만; KIS 평문 Secrets 금지 | Must | GHA workflow grep·`not live` 마커 | [ADR-008](adr/ADR-008-github-cicd-devops-mlops.md), [OPS-001](operations/OPS-001-github-cicd.md) |
+| **ASR-015** | 주문 **`client_order_id` 필수**; 재시도·중복 제출 시 이중 체결 방지 | Must | QS-015, RG-08 | UC-002, [ARC-004](architecture/ARC-004-resilience-security-crosscut.md) |
+| **ASR-016** | KIS 호출 **Circuit Breaker**·타임아웃·백오프([REL-001](reliability/REL-001-slo-resilience-patterns.md)) | Must | QS-016 | UC-003 |
+| **ASR-017** | 금전·승인·토큰 이벤트 **append-only 감사** 100% | Must | QS-018 | UC-008, [SEC-001](security/SEC-001-threat-model-and-controls.md) |
+| **ASR-018** | SyncHub: **페어링·세션 토큰**·무토큰 쓰기 API 거부 | Must | QS-017 | UC-010, ADR-007 |
+| **ASR-019** | **live** 주문: 시세 `as_of` stale(기본 5s) 시 차단 | Must | QS-013, RG-07 | UC-002 |
+| **ASR-020** | EventStore **WAL**·기동 `integrity_check`·일 백업 | Must | QS-014 | UC-008 |
+| **ASR-021** | 릴리스 **lockfile/SBOM**·critical CVE 미패치 0 | Must | QS-019 | [OPS-001](operations/OPS-001-github-cicd.md) |
+| **ASR-022** | **`live_trading_enabled`** 전역 kill switch — false 시 live 주문 전경로 거부 | Must | 설정·단위 | UC-011 |
+| **ASR-023** | 음성·자연어(UC-013): **확인 화면·confirm API** 없이 주문 금지; AI(UC-006) ApprovalGate **우회 금지**; 전사문 기본 미저장 | Must | QS-021, Hub 403 테스트 | UC-013, [ADR-011](adr/ADR-011-android-voice-nl-trading.md) |
 
 ---
 

@@ -17,6 +17,9 @@ secrets/**/*.json
 !secrets/plain/kis_credentials.json.example
 packages/yst_credentials/_embedded.py
 
+# Scenario test reports (screenshots) — TST-002
+artifacts/test-reports/
+
 # Local env overrides
 .env.local
 *.key

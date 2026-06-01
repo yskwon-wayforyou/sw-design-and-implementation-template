@@ -1,0 +1,66 @@
+---
+description: YSTrading 구현 시 TDD·pytest·NBDE·시나리오 테스트 필수
+globs:
+  - "packages/**"
+  - "tests/**"
+  - "scripts/**"
+alwaysApply: false
+---
+
+# TDD·테스트 구현 지침
+
+정본: [docs/implementation/TST-001-testing-strategy.md](../../docs/implementation/TST-001-testing-strategy.md) · 진행: [TRACK-001-progress.md](../../docs/implementation/TRACK-001-progress.md)
+
+## TDD (필수)
+
+1. **프로덕션 코드보다 테스트를 먼저** 작성한다 (Red → Green → Refactor).
+2. 한 TRACK 태스크(P0-01 등)당 **최소 1회** 위 사이클을 완료한다.
+3. 리팩터 시 **테스트를 먼저 green** 확인한 뒤 구조 변경한다.
+4. “나중에 테스트” PR은 **기본 거부** — 예외는 오너 명시 시만.
+
+## pytest
+
+- **기본 러너**: `pytest` (unittest 직접 사용 지양).
+- 실행: `pytest tests/unit`, `pytest tests/scenario` (로컬).
+- CI와 동일 마커·경로 사용.
+
+## 이중 레이어
+
+| 레이어 | 경로 | 목적 |
+|--------|------|------|
+| Unit + Integration | `tests/unit/`, `tests/integration/` | 포트·도메인·kis mock |
+| Scenario | `tests/scenario/` | **실제 UI** + 사용자 이벤트 주입 (`pytest-qt`, `UiDriver`) |
+
+UC가 있는 기능은 **scenario 테스트 1건 이상** 필수.
+
+## 시나리오 HTML 리포트 (필수)
+
+시나리오(`tests/scenario/`) 실행 **마다**:
+
+1. `scenario_session.begin()` / `step()` / `finish()` 사용 ([TST-002](../../docs/implementation/TST-002-scenario-html-report.md))
+2. **단계마다** 스크린샷 + `expectation` 기록
+3. 종료 후 `artifacts/test-reports/.../index.html` 생성·**브라우저로 확인**
+4. `./scripts/run_scenario_with_report.sh` 권장
+
+Pass/Fail: pytest assert 1차; 스크린샷·`analysis_verdict`는 리포트에 표시.
+
+## NBDE (필수)
+
+모든 테스트 모듈(파일 또는 클래스)은 다음을 **실제 실행**한다:
+
+- **N** Normal — 해피패스
+- **B** Boundary — 경계값·한도 직전
+- **A** Abnormal — 검증 실패·RG deny·잘못된 입력
+- **E** Exceptional — 401/5xx·WS 단절·타임아웃·DB 오류
+
+네 가지 중 하나라도 **의도적 skip**이면 `@pytest.mark.skip(reason="...")` + 이슈 링크.
+
+## 안전
+
+- CI·기본 테스트: **mock KIS / paper only**.
+- live TR·live 주문 테스트 **금지** ([OPS-001](../../docs/operations/OPS-001-github-cicd.md)).
+
+## 완료 시
+
+- [TRACK-001-progress.md](../../docs/implementation/TRACK-001-progress.md) 상태·커밋·테스트 열 갱신.
+- Definition of Done: [PLAN-001](../../docs/implementation/PLAN-001-implementation-schedule.md) §4.

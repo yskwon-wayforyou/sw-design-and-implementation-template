@@ -11,7 +11,7 @@
 
 실계좌·AI·자동화 경로에서 오주문·한도 초과·프로필 오류를 차단한다.
 
-## 규칙 (v1)
+## 규칙 (v1 + 상용)
 
 | ID | 규칙 |
 |----|------|
@@ -20,7 +20,12 @@
 | RG-03 | (선택) 일일 주문 금액/횟수 한도 |
 | RG-04 | AI: 기본 승인 필수 |
 | RG-05 | Addon 직접 OrderService 호출 금지 |
-| RG-06 | `AST_DISABLE_LIVE` 존중 |
+| RG-06 | `AST_DISABLE_LIVE` / `live_trading_enabled=false` 존중 |
+| RG-07 | live + 시세 stale(기본 `as_of` > 5s) → **DENY** |
+| RG-08 | 동일 `client_order_id` 중복 → **DENY** |
+| RG-09 | KIS Circuit **OPEN** → 주문 **DENY**(fail-fast) |
+
+상세: [ARC-004](../architecture/ARC-004-resilience-security-crosscut.md), [QLT-002](../QLT-002-commercial-quality-baseline.md)
 
 ## 기본 흐름
 
@@ -30,4 +35,4 @@
 
 ## 추적
 
-- NFR-01, NFR-02, ASR-002~004
+- NFR-01, NFR-02, ASR-002~004, ASR-015~022

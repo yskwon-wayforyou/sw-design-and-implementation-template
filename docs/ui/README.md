@@ -30,9 +30,11 @@
 6. [UI-004-plain-language-and-labels.md](./UI-004-plain-language-and-labels.md) — 화면 한글 용어
 7. [UI-005-cursor-light-theme.md](./UI-005-cursor-light-theme.md) — Cursor Light QPalette
 8. O-01~03 확정: [ADR-007](../adr/ADR-007-connectivity-and-shared-math-v1.md) (배경 설명 [DEC-003](../decision/DEC-003-open-issues-guide.md))
+9. [UI-006-android-voice-nl.md](./UI-006-android-voice-nl.md) — Android 음성·자연어 매매 (UC-013)
 
 ## 관련 설계
 
+- [ARC-000-architecture.md](../ARC-000-architecture.md) §5 UI 설계 (통합 명세)
 - [ARC-003-trading-modes-greenfield.md](../architecture/ARC-003-trading-modes-greenfield.md)
 - [ADR-005-greenfield-ui-and-modes.md](../adr/ADR-005-greenfield-ui-and-modes.md)
 - UC·모드 정의: [SYS-001-system.md](../SYS-001-system.md) §4

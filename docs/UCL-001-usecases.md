@@ -34,6 +34,7 @@
 | UC-010 | Android 기능 패리티·승인 푸시 | P1 | 공통 | [usecase/UC-010-android-parity.md](usecase/UC-010-android-parity.md) |
 | UC-011 | RiskGuard 및 실전 안전장치 | P0 | 공통 | [usecase/UC-011-risk-guard.md](usecase/UC-011-risk-guard.md) |
 | UC-012 | 뉴스·공시·시장 맥락 | P2 | 공통 | [usecase/UC-012-news-disclosure.md](usecase/UC-012-news-disclosure.md) |
+| UC-013 | Android 음성·자연어 매매 | P1 | Manual·Android | [usecase/UC-013-voice-nl-trading-android.md](usecase/UC-013-voice-nl-trading-android.md) |
 
 **우선순위**: P0 = MVP 차단, P1 = 제품 차별화, P2 = 보조.
 
@@ -50,7 +51,8 @@
 | SCR-HISTORY | UC-008 |
 | SCR-ML / 자동매매 Model | UC-006, UC-007 |
 | SCR-MKTINFO | UC-009, UC-012 |
-| Android Shell | UC-010, UC-006 |
+| Android Shell | UC-010, UC-006, UC-013 |
+| SCR-AND-VOICE / NL-CONFIRM | UC-013 |
 
 출처: [../doc/25-shinhan-ref-hts-ia-requirements-ko.md](../doc/25-shinhan-ref-hts-ia-requirements-ko.md)
 
@@ -72,6 +74,6 @@
 
 ## 5. Phase 2 체크포인트
 
-- [x] 주요 기능 UC 12건 식별
+- [x] 주요 기능 UC 13건 식별
 - [x] 각 UC 상세 문서 링크
 - [ ] Phase 3 도메인 모델과 1:1 대응 검증

@@ -1,0 +1,8 @@
+# UC-002 Normal scenario — UI keyword expectations (optional, used by analyze_step)
+steps:
+  - title: "1. 모의투자 프로필 확인"
+    ui_contains: ["모의투자"]
+  - title: "2. 주문서 입력"
+    ui_contains: ["매수", "종목"]
+  - title: "3. 주문 확인"
+    ui_contains: ["주문"]

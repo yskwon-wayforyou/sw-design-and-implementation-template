@@ -26,8 +26,8 @@ flowchart LR
   Phone[Android_휴대폰]
   Mac[macOS_YSTrading]
   KIS[KIS_서버]
-  Phone -->|"집_WiFi_LAN"| Mac
-  Mac -->|"인터넷_HTTPS"| KIS
+  Phone -->|"집 WiFi LAN"| Mac
+  Mac -->|"인터넷 HTTPS"| KIS
 ```
 
 ### 선택지 A — **LAN + 페어링 토큰** (v1 권장)

@@ -162,7 +162,7 @@ data_hash, trained_at
 3. `ActionPolicy` → propose or hold
 4. `ApprovalGate` if not HOLD
 
-**학습 데이터 수집 경로**:
+**학습 데이터 수집 경로** (상세 Flow·피처·SRC): [DAT-002-rnn-training-collection-flow.md](../data/DAT-002-rnn-training-collection-flow.md)
 
 ```mermaid
 flowchart LR

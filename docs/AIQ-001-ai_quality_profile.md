@@ -22,8 +22,11 @@
 - paper 백테스트 PnL (참고, 보장 없음)
 - 승인률·거부율·만료율 대시보드
 - 데이터 드리프트: feature 분포 KS 검정(월 1회 배치)
+- **상용**: stale 시세 시 infer/주문 차단; `data_hash` 게이트 ([QS-013](quality/QS-013-stale-quote-and-fallback.md), [QS-020](quality/QS-020-ml-data-integrity.md))
+- live AI 릴리스: [QLT-002](QLT-002-commercial-quality-baseline.md) §4 게이트 G1~G5
 
 ## 관련
 
-- UC-006, UC-007, QS-004, QS-011
-- [qualities.md](QLT-001-qualities.md)
+- UC-006, UC-007, QS-004, QS-011, QS-020
+- [QLT-001](QLT-001-qualities.md), [QLT-002](QLT-002-commercial-quality-baseline.md)
+- [SEC-001](security/SEC-001-threat-model-and-controls.md) §8

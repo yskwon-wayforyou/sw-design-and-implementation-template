@@ -9,7 +9,7 @@
 
 ## 목적
 
-Android 단말에서 macOS와 **동등한** 조회·주문·모드·AI 승인 기능을 제공한다.
+Android 단말에서 macOS와 **동등한** 조회·주문·모드·AI 승인 기능을 제공한다. **음성·자연어 주문**은 [UC-013](UC-013-voice-nl-trading-android.md).
 
 ## 아키텍처 옵션 (Phase 5~6에서 채택: 하이브리드 B)
 

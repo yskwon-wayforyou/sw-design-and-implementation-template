@@ -21,14 +21,17 @@
 ## 2. 저장소·브랜치 전략
 
 ```mermaid
-gitGraph
-  commit id: "main"
-  branch feat/uc-002-order
-  checkout feat/uc-002-order
-  commit id: "wip"
-  commit id: "tests"
-  checkout main
-  merge feat/uc-002-order tag: "v0.2.0"
+flowchart LR
+  main["main"]
+  feat["feat/uc-002-order"]
+  wip["wip"]
+  tests["tests"]
+  tag["v0.2.0"]
+  main --> feat
+  feat --> wip
+  wip --> tests
+  tests --> tag
+  tag --> main
 ```
 
 | 브랜치 | 용도 | 병합 대상 | CI |

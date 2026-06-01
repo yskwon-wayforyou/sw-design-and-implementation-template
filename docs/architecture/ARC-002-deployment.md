@@ -98,15 +98,15 @@ flowchart TB
 sequenceDiagram
   participant Mac as macOS_AiAddon
   participant Hub as SyncHub
-  participant And as Android
+  participant AndDev as Android
   participant KIS as KIS
 
   Mac->>Mac: RNN infer
   Mac->>Hub: POST /approvals
-  Hub->>And: push notification
-  And->>Hub: POST /approvals/id/approve
+  Hub->>AndDev: push notification
+  AndDev->>Hub: POST /approvals/id/approve
   Hub->>Mac: callback/wake
-  Mac->>KIS: order (via kis_core)
+  Mac->>KIS: "order via kis_core"
 ```
 
 ---

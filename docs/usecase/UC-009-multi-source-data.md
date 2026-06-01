@@ -20,12 +20,15 @@ KIS 외 원천(지수, 환율, 뉴스, pykrx)을 **신뢰·실시간 정책**에
 
 ## 원천 (v1)
 
-| 원천 | Tier | 용도 |
-|------|------|------|
-| KIS REST/WS | A/B | 시세·주문 |
-| pykrx | C | 차트·장기 피처 |
-| 공개 지수 API | External | 현황 |
-| DART/뉴스 | External | 링크·헤드라인 |
+| TraceID | 제목 | Tier | 용도 |
+|---------|------|------|------|
+| KIS-* | KIS REST/WS | A/B | 시세·주문·지수 |
+| PYK-* | pykrx | C | 차트·RNN Tier1 백필 |
+| DART-* | OpenDART | External | 공시 목록 |
+| RSS-* | RSS 뉴스 | External | 헤드라인만 |
+| ECOS-FX | 한국은행 (v1.1) | External | 환율 |
+
+**정본 표**(엔드포인트·주기·키): [DAT-001-external-sources-catalog.md](../data/DAT-001-external-sources-catalog.md)
 
 ## 실패
 
