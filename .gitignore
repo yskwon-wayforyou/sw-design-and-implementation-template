@@ -1,14 +1,23 @@
 .DS_Store
-Thumbs.db
-*.log
+__pycache__/
+*.py[cod]
+.venv/
+.env
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.idea/
 .vscode/settings.json
 
-# Agent Notebook runtime artifacts
-.agent-notebook/
+# KIS credentials — never commit plain (ADR-006)
+secrets/plain/kis_credentials.json
+secrets/.master.key
+secrets/**/*.json
+!secrets/plain/kis_credentials.json.example
+packages/yst_credentials/_embedded.py
 
-# Sample execution outputs (generated)
-samples/_run/
-
-# Local PDF lecture extraction (not part of template)
-.venv-pdf/
-.lecture_extract/
+# Local env overrides
+.env.local
+*.key
+credentials/

@@ -1,0 +1,32 @@
+---
+description: YSTrading yst_ui 구현 시 UI 용어·Cursor Light 테마·자격증명 처리
+globs:
+  - "**/yst_ui/**"
+  - "**/ast_mobile/**"
+  - "packages/**/android/**"
+---
+
+# yst_ui · Android UI 구현 규칙
+
+## 일반 사용자 용어 (필수)
+
+- 사용자에게 보이는 모든 문자열은 [docs/ui/UI-004-plain-language-and-labels.md](../../docs/ui/UI-004-plain-language-and-labels.md)를 따른다.
+- `Tier`, `OAuth`, `paper`/`live` 단독 표기, `SyncHub`, `RNN` 등 기술어를 라벨에 쓰지 않는다.
+- `paper` → **모의투자**, `live` → **실전투자**.
+
+## Look & Feel (필수)
+
+- macOS PySide6: [docs/ui/UI-005-cursor-light-theme.md](../../docs/ui/UI-005-cursor-light-theme.md)의 **Cursor Light** 팔레트만 사용한다.
+- PoC `gui_desktop` 다크 QSS·팔레트를 가져오지 않는다.
+- `QApplication` 기동 직후 `apply_cursor_light_theme(app)` 호출.
+
+## 자격증명 (필수)
+
+- [docs/adr/ADR-006-personal-credentials-encryption.md](../../docs/adr/ADR-006-personal-credentials-encryption.md).
+- KIS 키는 **암호화된 `secrets.enc`만** 사용; Git·로그·UI에 평문 금지.
+- Android: `assets/secrets.enc` 포함 배포(개인 전용).
+- macOS: `~/.YSTrading/secrets.enc` 또는 빌드 시 번들 복사.
+
+## PoC GUI
+
+- `gui_desktop` import·복사 **금지** ([ADR-005](../../docs/adr/ADR-005-greenfield-ui-and-modes.md)).

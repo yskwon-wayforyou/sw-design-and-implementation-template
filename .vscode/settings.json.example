@@ -1,7 +1,0 @@
-{
-  "designPrinciples.architectureDirectory": "docs",
-  "files.associations": {
-    "**/SKILL.md": "markdown",
-    "**/.cursor/skills/**/*.md": "markdown"
-  }
-}
